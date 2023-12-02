@@ -16,10 +16,17 @@
   }
 }
 
-body {
+@layer base {
+  body {
+    @apply dark:bg-darkViolet;
+  }
 }
 
-/* #cta {
+html {
+  scroll-behavior: smooth;
+}
+
+#cta {
   background-image: url("/bg-boost-desktop.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +35,7 @@ body {
 .ficon:hover {
   filter: invert(79%) sepia(61%) saturate(464%) hue-rotate(130deg)
     brightness(89%) contrast(85%);
-} */
+}
 
 /* HAMBURGER MENU */
 

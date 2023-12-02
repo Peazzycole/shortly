@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 type LinkWrapperProps = {
   links: {
     oldLink: string;
@@ -6,14 +11,17 @@ type LinkWrapperProps = {
 };
 
 const LinkWrapper = (props: LinkWrapperProps) => {
+  const [copied, setCopied] = useState(false);
+  const [index, setIndex] = useState<number | null>(null);
+
   return (
     <>
       {props.links.map((link, i) => (
         <div
-          className="flex flex-col items-center justify-between w-full p-6 bg-white rounded-lg md:flex-row"
+          className="flex flex-col items-center justify-between w-full p-6 bg-white dark:bg-darkViolet rounded-lg md:flex-row"
           key={i}
         >
-          <p className="font-bold text-center text-veryDarkViolet md:text-left truncate max-w-[30ch]">
+          <p className="font-bold text-center text-veryDarkViolet md:text-left truncate max-w-[30ch] dark:text-white">
             {link.oldLink}
           </p>
 
@@ -21,9 +29,23 @@ const LinkWrapper = (props: LinkWrapperProps) => {
             <div className="font-bold text-cyan truncate max-w-[20ch]">
               {link.newLink}
             </div>
-            <button className="p-2 px-8 text-white bg-cyan rounded-lg hover:opacity-70 focus:outline-none">
-              Copy
-            </button>
+            <CopyToClipboard
+              text={link.newLink}
+              onCopy={() => {
+                setCopied(true);
+                setIndex(i);
+              }}
+            >
+              <button
+                className={`p-2 px-8 text-white ${
+                  index === i && copied
+                    ? "bg-darkViolet dark:bg-grayishViolet"
+                    : "bg-cyan "
+                } rounded-lg hover:opacity-70 focus:outline-none`}
+              >
+                Copy
+              </button>
+            </CopyToClipboard>
           </div>
         </div>
       ))}

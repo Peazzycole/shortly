@@ -1,47 +1,50 @@
 "use client";
 
+import useThemeSwitcher from "@/helper/useThemeSwitcher";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 const Nav: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
+  const [mode, setMode] = useThemeSwitcher();
 
   return (
     <nav className="relative container mx-auto p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
-          <Image src="/logo.svg" alt="" height={33} width={121} />
+          {mode === "light" ? (
+            <Image src="/logo.svg" alt="" height={33} width={121} />
+          ) : (
+            <Image src="/logoDark.png" alt="" height={33} width={121} />
+          )}
           <div className="hidden space-x-8 font-bold lg:flex">
             <Link
-              href="#"
-              className="text-grayishViolet hover:text-veryDarkViolet"
+              href="#stats"
+              className="text-grayishViolet hover:text-veryDarkViolet dark:text-white/80"
             >
               Features
             </Link>
             <Link
               href="#"
-              className="text-grayishViolet hover:text-veryDarkViolet"
+              className="text-grayishViolet hover:text-veryDarkViolet dark:text-white/80"
             >
               Pricing
-            </Link>
-            <Link
-              href="#"
-              className="text-grayishViolet hover:text-veryDarkViolet"
-            >
-              Resources
             </Link>
           </div>
         </div>
 
         <div className="hidden items-center space-x-6 font-bold text-grayishViolet lg:flex">
-          <div className="hover:text-veryDarkViolet">Login</div>
-          <Link
-            href="#"
-            className="px-8 py-3 font-bold text-white bg-cyan rounded-full hover:opacity-70"
+          <button
+            onClick={() => setMode(mode === "light" ? "dark" : "light")}
+            className="bg-white rounded-full p-1 absolute right-4 top-4 md:static hover:scale-105 transition-all duration-300"
           >
-            Sign Up
-          </Link>
+            {mode === "dark" ? (
+              <Image src="/sun.svg" width={20} height={20} alt="sun" />
+            ) : (
+              <Image src="/moon.svg" width={20} height={20} alt="moon" />
+            )}
+          </button>
         </div>
 
         <button

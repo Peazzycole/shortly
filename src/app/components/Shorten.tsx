@@ -19,7 +19,10 @@ const Shorten = () => {
   };
 
   return (
-    <section id="shorten" className="relative bg-gray-100">
+    <section
+      id="shorten"
+      className="relative bg-gray-100 dark:bg-grayishViolet"
+    >
       <div className="max-w-4xl mx-auto p-6 space-y-6">
         <Form getDataFromForm={getDataFromForm} />
         <LinkWrapper links={links} />
