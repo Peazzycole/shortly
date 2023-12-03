@@ -13,9 +13,10 @@ const Nav: React.FC = () => {
     <nav className="relative container mx-auto p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
-          {mode === "light" ? (
+          {mode === "light" && (
             <Image src="/logo.svg" alt="" height={33} width={121} />
-          ) : (
+          )}
+          {mode === "dark" && (
             <Image src="/logoDark.png" alt="" height={33} width={121} />
           )}
           <div className="hidden space-x-8 font-bold lg:flex">
